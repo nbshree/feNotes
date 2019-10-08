@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+<input type="text" id= "input1">
+</body>
+<script>
+
+
+var debounce = (fn, wait) => {
+	let timer, startTimeStamp=0;
+	let context, args;
+ 
+	let run = (timerInterval)=>{
+		timer= setTimeout(()=>{
+			let now = (new Date()).getTime();
+			let interval=now-startTimeStamp
+			if(interval<timerInterval){ // the timer start time has been reset, so the interval is less than timerInterval
+				console.log('debounce reset',timerInterval-interval);
+				startTimeStamp=now;
+				run(timerInterval);  // reset timer for left time 
+			}else{
+				fn.apply(context,args);
+				clearTimeout(timer);
+				timer=null;
+			}
+			
+		},timerInterval);
+	}
+ 
+	return function(){
+		context=this;
+		args=arguments;
+		let now = (new Date()).getTime();
+		startTimeStamp=now;
+ 
+		if(!timer){
+			console.log('debounce set',wait);
+			run(wait);    // last timer alreay executed, set a new timer
+		}
+		
+	}
+ 
+}
+var debounce2 = function(idle, action){
+  var last
+  return function(){
+    var ctx = this, args = arguments
+    clearTimeout(last)
+    last = setTimeout(function(){
+        action.apply(ctx, args)
+    }, idle)
+  }
+}
+var dec2 = debounce2(1000,con);
+document.getElementById("input1").addEventListener("input", debounce(con,1000));
+function con(){
+  console.log("1")
+}
+</script>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    function EventApi() {
+    }
+    EventApi.prototype = {
+        clientList: {},
+        listen: (key, fn) => {
+            if (!this.EventApi.clientList[key]) {
+                this.EventApi.clientList[key] = []
+            }
+            this.EventApi.clientList[key].push(fn)
+        },
+        trigger: (...rest) => {
+            const key = Array.prototype.shift.call(rest)
+            const fns = this.EventApi.clientList[key]
+            if (!fns || fns.length === 0) {
+                return
+            }
+            for (let i = 0, listener; listener = fns[i++];) {
+                listener.apply(this, rest)
+            }
+        },
+        remove: (key, fn) => {
+            const fns = this.EventApi.clientList[key]
+            if (!fns || fns.length === 0) {
+                return
+            }
+            const index = fns.indexOf(fn)
+            if (index !== -1) {
+                fns.splice(index, 1)
+            }
+        }
+    }
+    window.EventApi = new EventApi();
+    function onMessage1() {
+        console.log('message 1')
+    }
+    function onMessage2() {
+        console.log('message 2')
+    }
+
+    EventApi.listen('message', onMessage1)
+    EventApi.listen('message', onMessage2)
+    EventApi.listen('message1', onMessage2)
+
+1
+    EventApi.trigger('message','message1')
+    // message 1
+    // message 2
+
+    EventApi.remove('message', onMessage1)
+    EventApi.trigger('message')
+      // message 2
+</script>
+
+</html>

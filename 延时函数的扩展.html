@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+</head>
+<style>
+  html {
+    font-size: 100px
+  }
+  .a1 {
+    width: 100px;
+    height: 50px;
+    background: black
+  }
+  .a2 {
+    width: 1rem;
+    height: 50px;
+    background: black
+  }
+</style>
+
+<body>
+  <div class="a1"></div>
+  <br>
+  <div class="a2"></div>
+</body>
+<script>
+const tasks = []; // 这里存放异步操作的 Promise
+const output = (i) => new Promise((resolve) => {
+    setTimeout(() => {
+        console.log(new Date, i);
+        resolve();
+    }, 1000 * i);
+});
+
+// 生成全部的异步操作
+for (var i = 0; i < 5; i++) {
+    tasks.push(output(i));
+}
+
+// 异步操作完成之后，输出最后的 i
+Promise.all(tasks).then((val) => {
+    setTimeout(() => {
+        console.log(new Date, i,val);
+    }, 1000);
+});
+
+// 模拟其他语言中的 sleep，实际上可以是任何异步操作
+const sleep = (timeountMS) => new Promise((resolve) => {
+    setTimeout(resolve, timeountMS);
+});
+
+(async () => {  // 声明即执行的 async 函数表达式
+    for (var i = 0; i < 5; i++) {
+        await sleep(1000);
+        console.log(new Date, i);
+    }
+
+    await sleep(1000);
+    console.log(new Date, i);
+})();
+</script>
+</html>

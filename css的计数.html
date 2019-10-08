@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        li {
+            list-style: decimal;
+        }
+
+        body,
+        .b {
+            counter-reset: c;
+        }
+
+        .a::before {
+            content: counters(c, ".") "：";
+            counter-increment: c;
+        }
+
+        div {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="a">第一层
+        <div class="b">
+            <div class="a">第二层
+                <div class="b">
+                    <div class="a">第三层</div>
+                    <div class="a">第三层</div>
+                    <div class="a">第三层</div>
+                </div>
+            </div>
+            <div class="a">第二层</div>
+            <div class="a">第二层</div>
+        </div>
+    </div>
+    <div class="a">第一层
+        <div class="b">
+            <div class="a">第二层</div>
+            <div class="a">第二层</div>
+        </div>
+    </div>
+</body>
+
+</html>
