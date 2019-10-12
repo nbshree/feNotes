@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+</body>
+<script>
+    var array = [1,6,2,7,5,3,1,1,6,7,10];
+    var newArray = [...new Set(array)];//去重
+    var newArray = [...new Set(array)].sort((a,b)=>b-a);//降序
+
+    console.log(newArray);
+</script>
+</html>
+
