@@ -1,0 +1,9 @@
+nginx -s quit
+killall nginx
+nginx -s reload
+
+
+cd /usr/share/nginx/html
+nginx -s quit
+vim default.conf
+cd /etc/nginx/conf.d
