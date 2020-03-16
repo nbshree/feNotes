@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>放大镜</title>
+    <style>
+        .clearfix:after {
+            clear: both;
+            font-size: 0;
+            height: 0;
+            display: block;
+            visibility: hidden;
+            content: " ";
+            line-height: 0
+        }
+
+        div {
+            box-sizing: border-box;
+        }
+
+        .f-l {
+            float: left;
+        }
+
+        .p-r {
+            position: relative;
+        }
+
+        .region {
+            /*display: none;*/
+            background: #F1C40F;
+            opacity: 0.3;
+            height: 150px;
+            width: 250px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .leftImg, .rightImg {
+            height: 300px;
+            width: 500px;
+            background-image: url("https://bkimg.cdn.bcebos.com/pic/a08b87d6277f9e2f2bc7f7961330e924b999f3ba?x-bce-process=image");
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
+
+        .rightImg {
+            margin-left: 20px;
+            background-size: 200% 200%;
+        }
+    </style>
+</head>
+<body>
+<div class="clearfix">
+    <div class="left f-l p-r">
+        <div class="leftImg"></div>
+        <div class="region"></div>
+    </div>
+    <div class="rightImg f-l"></div>
+</div>
+</body>
+<script>
+    var left = document.querySelector(".left");
+    var leftImg = document.querySelector(".leftImg");
+    var region = document.querySelector(".region");
+    var rightImg = document.querySelector(".rightImg");
+    // left.addEventListener("mouseover", function (e) {
+    //     region.style.display="block";
+    //     // var x;
+    //     // var y;
+    //     // if(e.offsetY>225){
+    //     //     y = 150;
+    //     // }else if(e.offsetY<75){
+    //     //     y = 0;
+    //     // }else{
+    //     //     y = e.offsetY-75
+    //     // }
+    //     // if(e.offsetX>375){
+    //     //     x = 250;
+    //     // }else if(e.offsetX<125){
+    //     //     x = 0;
+    //     // }else{
+    //     //     x = e.offsetX-125
+    //     // }
+    //     // region.style.top=y+"px";
+    //     // region.style.left=x+"px";
+    //     // console.log("x="+e.offsetX)
+    //     // console.log("y="+e.offsetY)
+    //
+    // });
+    // leftImg.addEventListener("mouseout", function (e) {
+    //     region.style.display="none";
+    // });
+    left.addEventListener("mousemove", function (e) {
+        // var x = e.pageX - left.offsetLeft;
+        // var y = e.pageY - left.offsetTop;
+        var x = e.offsetX;
+        var y = e.offsetY;//这边可以使用offset，是因为css中region加入了pointer-events: none，此样式可以禁用元素的鼠标事件；
+
+        if (x < 125) {
+            x = 125;
+        }
+        if (x > 375) {
+            x = 375;
+        }
+        if (y < 75) {
+            y = 75;
+        }
+        if (y > 225) {
+            y = 225;
+        }
+        region.style.left = `${x - 125}px`;
+        region.style.top = `${y - 75}px`;
+        rightImg.style.backgroundPosition = `-${2 * x - 250}px -${2 * y - 150}px`
+    })
+</script>
+</html>
