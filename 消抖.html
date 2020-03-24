@@ -17,7 +17,7 @@
 var debounce = (fn, wait) => {
 	let timer, startTimeStamp=0;
 	let context, args;
- 
+
 	let run = (timerInterval)=>{
 		timer= setTimeout(()=>{
 			let now = (new Date()).getTime();
@@ -25,29 +25,29 @@ var debounce = (fn, wait) => {
 			if(interval<timerInterval){ // the timer start time has been reset, so the interval is less than timerInterval
 				console.log('debounce reset',timerInterval-interval);
 				startTimeStamp=now;
-				run(timerInterval);  // reset timer for left time 
+				run(timerInterval);  // reset timer for left time
 			}else{
 				fn.apply(context,args);
 				clearTimeout(timer);
 				timer=null;
 			}
-			
+
 		},timerInterval);
 	}
- 
+
 	return function(){
 		context=this;
 		args=arguments;
 		let now = (new Date()).getTime();
 		startTimeStamp=now;
- 
+
 		if(!timer){
 			console.log('debounce set',wait);
 			run(wait);    // last timer alreay executed, set a new timer
 		}
-		
+
 	}
- 
+
 }
 var debounce2 = function(idle, action){
   var last
@@ -64,6 +64,17 @@ document.getElementById("input1").addEventListener("input", debounce(con,1000));
 function con(){
   console.log("1")
 }
+
+var debounce20200320 = (function (time) {
+    return function (fn, duration) {
+        return ()=>{
+            clearTimeout(time);
+            time = setTimeout(function(){
+                fn()
+            },duration);
+        }
+    };
+})();
 </script>
 
 </html>
