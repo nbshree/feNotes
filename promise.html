@@ -59,5 +59,27 @@
         throw new Error("1")
     }
     test().then(res=>console.log(res),res=>console.log(res))
+
+
+    console.log(1);
+    Promise.resolve().then(console.log(2));
+    console.log(3);
+    Promise.resolve().then(() => {
+        console.log(4)
+    });
+    Promise.resolve().then(() => {
+        console.log(5);
+        setTimeout(() => {
+            console.log(6);
+        }, 0)
+    });
+    Promise.resolve().then(setTimeout(() => {
+        console.log(7);
+    }, 0));
+    setTimeout(() => {
+        console.log(8);
+    }, 0);
+
+    // 12345786
 </script>
 </html>
