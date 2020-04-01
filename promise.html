@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script src="http://dev2.nbeport.com/cdn/jquery/1.8.2/jquery-1.8.2-min.js"></script>
+<script>
+
+    // $.get("https://www.easy-mock.com/mock/5d48e3e68bdf39147cbb56d0/example1/test", function (res) {
+    //     console.log(res)
+    // });
+    const p1 = new Promise((resolve, reject) => {
+        $.get("https://www.easy-mock.com/mock/5d48e3e68bdf39147cbb56d0/example1/test", function (res) {
+            console.log(1)
+            resolve(res)
+        });
+        // setTimeout(() => {
+        //         resolve('result')
+        //     },
+        //     1000);
+    });
+
+    p1.then(res => res, err => err).then(res => console.log("res"+res), err => console.log("err"+err))
+    p1.then(res => console.log("res"+res), err => console.log("err"+err))
+    function* myGenerator() {
+        console.log(yield '1')  //test1
+        console.log(yield '2')  //test2
+        console.log(yield '3')  //test3
+    }
+
+    // 获取迭代器
+    const gen = myGenerator();
+
+    gen.next()
+    gen.next('test1')
+    gen.next('test2')
+    gen.next('test3')
+    function getSomething() {
+        return "something";
+    }
+
+    async function testAsync() {
+        return Promise.resolve("hello async");
+    }
+
+    async function testAsync2(a) {
+        return a;
+    }
+
+    async function test() {
+        const v1 = await getSomething();
+        const v2 = await testAsync();
+        const v3 = await testAsync2(v2);
+        console.log(v1, v2,v3);
+        throw new Error("1")
+    }
+    test().then(res=>console.log(res),res=>console.log(res))
+</script>
+</html>
