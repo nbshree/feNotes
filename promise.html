@@ -60,7 +60,7 @@
     }
     test().then(res=>console.log(res),res=>console.log(res))
 
-
+setTimeout(()=>{
     console.log(1);
     Promise.resolve().then(console.log(2));
     console.log(3);
@@ -80,6 +80,14 @@
         console.log(8);
     }, 0);
 
-    // 12345786
+    const myProTest = new Promise((resolve, reject) => {
+        console.log(9);
+        resolve("a")
+    });
+    myProTest.then((res)=>{console.log(res)})
+
+    // 123945a786
+},50)
+
 </script>
 </html>
