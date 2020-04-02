@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    var p = {
+        name: 'dage',
+        a:"1223"
+    }
+    // Object.defineProperty(p,'name',{
+    //     value:'xxx'
+    // })
+    // console.log(p.name)s
+    // p.name = '4rrr'
+    // console.log(p.name) // 4rrr
+    // Object.defineProperty(p,'name',{
+    //     writable:false,
+    //     value:'again'
+    // })
+    // p.name = '4rrr'
+    // console.log(p.name) // again
+    // Object.defineProperty(p,'test',{
+    //     value:'111'
+    // })
+    // console.log(p.test)
+    // p.test = 222;
+    // console.log(p.test)
+
+    Object.defineProperty(p,'test',{
+        get:function(target, key){
+            console.log()
+            return p.a;
+        },
+        set:function(val){
+            // console.log(key);
+            // console.log(target);
+            // console.log(val);
+            // return 'handsome '+val
+            this.a = val
+
+        }
+    })
+
+    p.test = 333;
+    console.log(p)
+    console.log(p.test)
+
+
+    //     var obj = {__book:'三国演义'}
+
+    // Object.defineProperty(obj,'book',{
+    //     get: function(){
+    // 　　　　　　
+    //         return '<<'+this.__book+'>>'
+    //     },
+    //     set: function(val){
+    // 　　　　　//this指向原对象，定义一个属性用来接收赋值
+    //         this.__book = val
+    //    }
+    // })
+
+    // console.log(obj.book)
+
+    // obj.book = '水浒传'
+
+    // console.log(obj.book)
+
+    // console.log(p.test)
+    // console.log(p)
+    // const objectTraps = {
+    //     get(target, key) {
+    //         console.log(key);
+    //         console.log(target);
+    //         return "1111"
+    //     },
+    //     set(target, key, val) {
+    //         console.log(key);
+    //         console.log(target);
+    //         console.log(val);
+    //         return true
+    //     }
+    // }
+    // objectTraps.a = 1;
+    // console.log(objectTraps)
+
+
+
+    // var test = {
+    //     _Name: "Limei",
+    //     _Age: 20,
+
+    //     get name() { return this._Name; },
+    //     set age(age) { this._Age = age+1; },
+    //     get age() { return this._Age; }
+    // }
+
+    // console.log(test.name + "" + test.age);//Limei 20
+    // test.name = "Lily";
+    // test.age = 18;
+    // console.log(test.name + "" + test.age);//Limei 18
+    // console.log(test._Name + "" + test._Age);//Limei 18
+</script>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    let o = function () {
+        this.toString = () => {
+            return 'my is o,'
+        }
+        this.valueOf = () => {
+            return 99
+        }
+    }
+    let n = new o()
+    var  test = 1e10;
+    console.log(test+"a") // 99abc
+    console.log(n.toString()) // 99abc
+    console.log(n + 'abc') // 99abc
+    console.log(n * 10) // 990
+    // 有没有很酷炫
+
+
+    // 当这两个函数同时存在时候，会先调用 valueOf ，若返回的不是原始类型，那么会调用 toString 方法，
+    // 如果这时候 toString 方法返回的也不是原始数据类型，那么就会报错
+    // TypeError: Cannot convert object to primitive value 如下
+
+    //
+    let o = function () {
+        this.toString = () => {
+            console.log('into toString')
+            return { 'string': 'ssss' }
+        }
+        this.valueOf = () => {
+            console.log('into valueOf')
+            return { 'val': 99 }
+        }
+    }
+    let n = new o()
+    console.log(n + 'xx')
+    //into valueOf
+    //into toString
+    // VM1904:12 Uncaught TypeError: Cannot convert object to primitive value
+</script>
+</html>
