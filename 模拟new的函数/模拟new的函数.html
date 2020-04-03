@@ -12,10 +12,12 @@
             Constructor = [].shift.call(arguments);
         obj.__proto__ = Constructor.prototype;
         var ret = Constructor.apply(obj, arguments);//相当于 在 obj的作用域下 去运行了Constructor（也就是fnf），所以导致 obj里有x=123
+        // console.log(ret)//1234
         return typeof ret === 'object' ? ret : obj;
     }
     function fnf() {
         this.x = 123
+        // return "1234"
     }
     let a2 = objectFactory(fnf) // 模拟 new fnf()
     console.log(a2.x) // 123
