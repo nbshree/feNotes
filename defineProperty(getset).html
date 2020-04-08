@@ -8,6 +8,7 @@
 </head>
 
 <body>
+<input type="text" id="a">
 
 </body>
 <script>
@@ -54,59 +55,23 @@
     console.log(p.test)
 
 
-    //     var obj = {__book:'三国演义'}
-
-    // Object.defineProperty(obj,'book',{
-    //     get: function(){
-    // 　　　　　　
-    //         return '<<'+this.__book+'>>'
-    //     },
-    //     set: function(val){
-    // 　　　　　//this指向原对象，定义一个属性用来接收赋值
-    //         this.__book = val
-    //    }
-    // })
-
-    // console.log(obj.book)
-
-    // obj.book = '水浒传'
-
-    // console.log(obj.book)
-
-    // console.log(p.test)
-    // console.log(p)
-    // const objectTraps = {
-    //     get(target, key) {
-    //         console.log(key);
-    //         console.log(target);
-    //         return "1111"
-    //     },
-    //     set(target, key, val) {
-    //         console.log(key);
-    //         console.log(target);
-    //         console.log(val);
-    //         return true
-    //     }
-    // }
-    // objectTraps.a = 1;
-    // console.log(objectTraps)
-
-
-
-    // var test = {
-    //     _Name: "Limei",
-    //     _Age: 20,
-
-    //     get name() { return this._Name; },
-    //     set age(age) { this._Age = age+1; },
-    //     get age() { return this._Age; }
-    // }
-
-    // console.log(test.name + "" + test.age);//Limei 20
-    // test.name = "Lily";
-    // test.age = 18;
-    // console.log(test.name + "" + test.age);//Limei 18
-    // console.log(test._Name + "" + test._Age);//Limei 18
+    var obj = {};
+    Object.defineProperty(obj, 'val', {
+        set: function (newVal) {
+            console.log(newVal)
+            document.getElementById("a").value = newVal == undefined ? '' : newVal;
+            document.getElementById("a").innerHTML = newVal == undefined ? '' : newVal;
+            this._val=newVal;
+        },
+        get:function () {
+            return this._val
+        }
+    });
+    document.getElementById("a").addEventListener("keyup", function (e) {
+        console.log(e.target.value)
+        obj.val = e.target.value;
+        console.log(obj)
+    })
 </script>
 
 </html>
