@@ -55,7 +55,6 @@
     EventApi.listen('message', onMessage2)
     EventApi.listen('message1', onMessage2)
 
-1
     EventApi.trigger('message','message1')
     // message 1
     // message 2
@@ -63,6 +62,48 @@
     EventApi.remove('message', onMessage1)
     EventApi.trigger('message')
       // message 2
+
+
+
+    //观察者
+    function EventCenter() {
+        if (!(this instanceof EventCenter)) {
+            return new EventCenter();
+        }
+        this._callbacks = {};
+        this._fired = {};
+    };
+    EventCenter.prototype.on = function (ev, callback) {
+        this._callbacks[ev] = this._callbacks[ev] || [];
+        this._callbacks[ev].push(callback);
+        return this;
+    }
+    EventCenter.prototype.emit = function (ev, callback) {
+        const fns = this._callbacks[ev];
+        const args = [].slice.call(arguments, 1);
+        console.log(args)
+        fns.forEach(fn =>
+            fn.apply(this, args)
+        );
+        return this;
+    }
+
+    const eventcenter = new EventCenter();
+    eventcenter.on('time-update', time => {
+        console.log(time);
+    });
+    eventcenter.on('time-update', time => {
+        console.log("new:"+time);
+    });
+
+    const id = setInterval(() => {
+        eventcenter.emit('time-update', Date.now());
+    }, 1000);
+    // 停止事件触发
+    setTimeout(() => {
+        clearInterval(id);
+    });
+    //观察者
 </script>
 
 </html>
