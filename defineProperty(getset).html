@@ -72,6 +72,21 @@
         obj.val = e.target.value;
         console.log(obj)
     })
+
+
+    var proxyObj = {};
+    var proxy = new Proxy(proxyObj, {
+        get: function (target, propKey, receiver) {
+            console.log(`getting ${propKey}!`);
+            return Reflect.get(target, propKey, receiver);
+        },
+        set: function (target, propKey, value, receiver) {
+            console.log(`setting ${propKey}!`);
+            return Reflect.set(target, propKey, value, receiver);
+        }
+    });
+    proxy.a = 1;
+    console.log(proxyObj.a)//1
 </script>
 
 </html>
