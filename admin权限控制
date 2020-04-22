@@ -1,0 +1,7 @@
+主要通过vue-router的beforeEach方法
+1、判断是否上锁
+2、判断是否已经登录
+3、加载路由（异步）
+
+
+登录：登录了之后分别存入localStorage和cookie（session）

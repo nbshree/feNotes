@@ -1,0 +1,29 @@
+1.cookie和localstorage的区别
+｛一、容量
+
+ cookie容量在4K左右，且有条数限制。localStorage的容量有5M。
+
+ 二、是否向服务器发送数据
+
+ cookie会向服务器发送数据，localStorage不会往服务器发送数据。
+
+ 三、过期时间
+
+ cookie的有过期时间，在没有设置过期时间，关闭浏览器就消失，默认过期时间是一次会话。localStorage没有过期时间。
+
+ 四、路径限制
+
+ cookie有路径的限制。localStorage没有路径的限制。
+
+ 五、存储类型
+
+ cookie存储的是字符串，字符串，字符串。localStorage存储的是对象，对象，对象。
+ ｝
+ 2.v-if和v-for同时存在 哪个优先级高
+ 3.关于admin的权限控制（重点）
+ 4.vuex：actions（对mutations操作），states，getters，mutations
+ 5.自定义指令
+ 6.webpack
+ 7.vue的生命周期（1.和dom无关的数据什么时候加载（created））（重点）
+ 8.$nextTick
+

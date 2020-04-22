@@ -25,6 +25,8 @@
     if (proto === null) {
       return true
     }
+    // console.log(Object.hasOwnProperty.call(proto, 'constructor'))
+
     var Ctor = hasOwnProperty.call(proto, 'constructor') && proto.constructor
     return (
       typeof Ctor == 'function' &&
@@ -50,9 +52,9 @@
   const data = produce(state, draftState => {
     // console.log(draftState.info.age)
     // draftState.info.age = 26
-    draftState.info.career.first.name = '222'
+    draftState.info.career.first.name = {age:12}
   })
-  data.info.career.first.name= '222'
+  // data.info.career.first.name= '333'
   console.log(data, state)
   console.log(data.data === state.data)
 
@@ -62,16 +64,11 @@
 
     const objectTraps = {
       get(target, key) {
-        console.log(key);
-        console.log(target);
         if (key === MY_IMMER) return target
         const data = copies.get(target) || target
         return getProxy(data[key])
       },
       set(target, key, val) {
-        console.log(key);
-        console.log(target);
-        console.log(val);
         const copy = getCopy(target)
         const newValue = getProxy(val)
         // 这里的判断用于拿 proxy 的 target
@@ -81,6 +78,7 @@
       }
     }
 
+    //生成proxy对象，并且塞入缓存
     const getProxy = data => {
       if (isProxy(data)) {
         return data
@@ -95,6 +93,7 @@
       }
       return data
     }
+
 
     const getCopy = data => {
       if (copies.has(data)) {
@@ -122,8 +121,8 @@
       }
       return data
     }
-
     const proxy = getProxy(baseState)
+
     fn(proxy)
     return finalize(baseState)
   }
