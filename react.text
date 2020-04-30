@@ -1,0 +1,10 @@
+为什么组件用大写开头:因为
+string 类型react会觉得他是一个原生dom节点
+ReactClass type 类型 自定义组件
+
+function MyDiv() {
+  return React.createElement("div", null);
+}
+
+React.createElement("myDiv", null);
+上面 React.createElement这个第一个type是字符串 会觉得他是一个原生dom节点创建
