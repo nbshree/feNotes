@@ -33,6 +33,9 @@
         }
     }
     //遍历数组
+    let obj = {
+        a: 1, b: 2, c: 3
+    }
     let array = [1, 2, 3, 'lynn', 'Lanny']
     console.log('for of: ')
     for (let value of array) {
@@ -40,6 +43,15 @@
     }
     console.log('\n' + 'for in: ')
     for (let key in array) {
+        console.log(key);
+    }
+
+    console.log('for of: ')
+    for (let value of obj) {
+        console.log(value);
+    }
+    console.log('\n' + 'for in: ')
+    for (let key in obj) {
         console.log(key);
     }
 

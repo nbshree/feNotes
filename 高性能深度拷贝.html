@@ -15,9 +15,9 @@
 
   const isPlainObject = value => {
     if (
-      !value ||
-      typeof value !== 'object' ||
-      {}.toString.call(value) != '[object Object]'
+            !value ||
+            typeof value !== 'object' ||
+            {}.toString.call(value) != '[object Object]'
     ) {
       return false
     }
@@ -29,34 +29,14 @@
 
     var Ctor = hasOwnProperty.call(proto, 'constructor') && proto.constructor
     return (
-      typeof Ctor == 'function' &&
-      Ctor instanceof Ctor &&
-      Function.prototype.toString.call(Ctor) ===
-      Function.prototype.toString.call(Object)
+            typeof Ctor == 'function' &&
+            Ctor instanceof Ctor &&
+            Function.prototype.toString.call(Ctor) ===
+            Function.prototype.toString.call(Object)
     )
   }
 
   const isProxy = value => !!value && !!value[MY_IMMER]
-  const state = {
-    info: {
-      name: 'yck',
-      career: {
-        first: {
-          name: '111'
-        }
-      }
-    },
-    data: [1]
-  }
-
-  const data = produce(state, draftState => {
-    // console.log(draftState.info.age)
-    // draftState.info.age = 26
-    draftState.info.career.first.name = {age:12}
-  })
-  // data.info.career.first.name= '333'
-  console.log(data, state)
-  console.log(data.data === state.data)
 
   function produce(baseState, fn) {
     const proxies = new Map()
@@ -99,7 +79,7 @@
       if (copies.has(data)) {
         return copies.get(data)
       }
-      const copy = Array.isArray(data) ? data.slice() : { ...data }
+      const copy = Array.isArray(data) ? data.slice() : {...data}
       copies.set(data, copy)
       return copy
     }
@@ -127,6 +107,27 @@
     return finalize(baseState)
   }
 
+
+  const state = {
+    info: {
+      name: 'yck',
+      career: {
+        first: {
+          name: '111'
+        }
+      }
+    },
+    data: [1]
+  }
+
+  const data = produce(state, draftState => {
+    // console.log(draftState.info.age)
+    // draftState.info.age = 26
+    draftState.info.career.first.name = {age: 12}
+  })
+  // data.info.career.first.name= '333'
+  console.log(data, state)
+  console.log(data.data === state.data)
 
 </script>
 

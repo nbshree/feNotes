@@ -9,7 +9,7 @@
 <script>
     function objectFactory() {
         var obj = {},
-            Constructor = [].shift.call(arguments);
+            Constructor = [].shift.call(arguments);//https://segmentfault.com/q/1010000005643934
         obj.__proto__ = Constructor.prototype;
         var ret = Constructor.apply(obj, arguments);//相当于 在 obj的作用域下 去运行了Constructor（也就是fnf），所以导致 obj里有x=123
         // console.log(ret)//1234
