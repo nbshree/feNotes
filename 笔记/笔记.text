@@ -32,3 +32,6 @@ flex-shrink: <number>;
 总结上面四点，可以看出不管在什么情况下，在同一时间，flex-shrink 和 flex-grow 只有一个能起作用，这其中的道理细想起来也很浅显：
 空间足够时，flex-grow 就有发挥的余地，而空间不足时，flex-shrink 就能起作用。
 当然，flex-wrap 的值为 wrap | wrap-reverse 时，表明可以换行，既然可以换行，一般情况下空间就总是足够的，flex-shrink 当然就不会起作用
+
+
+align-self: 允许单个项目有与其他项目不一样的对齐方式
