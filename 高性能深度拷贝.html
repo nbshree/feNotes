@@ -88,7 +88,7 @@
       if (proxies.has(data) || copies.has(data)) return true
     }
 
-    const finalize = data => {
+    const finalize = data => {Promise
       if (isPlainObject(data) || Array.isArray(data)) {
         if (!isChange(data)) {
           return data

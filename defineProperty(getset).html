@@ -87,6 +87,71 @@
     });
     proxy.a = 1;
     console.log(proxyObj.a)//1
+
+    function MVVM () {
+        var self = this;
+        this.data = {a:1,b:2};
+
+        Object.keys(this.data).forEach(function(key) {
+            self.proxyKeys(key);
+        });
+    }
+
+    MVVM.prototype = {
+        proxyKeys: function (key) {
+            var self = this;
+            Object.defineProperty(this, key, {
+                enumerable: false,
+                configurable: true,
+                get: function getter () {
+                    return self.data[key];
+                },
+                set: function setter (newVal) {
+                    self.data[key] = newVal;
+                }
+            });
+        }
+    }
+    var vm = new MVVM();
+    // {
+    //     data:
+    //         a: 1
+    //         b: 2
+    //     __proto__: Object
+    //     a: 1
+    //     b: 2
+    // }
+
+    (function(){function observable(obj) {
+        if (!obj || typeof obj !== 'object') {
+            return;
+        }
+        let keys = Object.keys(obj);
+        keys.forEach((key) => {
+            defineReactive(obj, key, obj[key])
+        })
+        return obj;
+    }
+    /**
+     * 将对象的属性用 Object.defineProperty() 进行设置
+     */
+    function defineReactive(obj, key, val) {
+        Object.defineProperty(obj, key, {
+            get() {
+                console.log(`${key}属性被读取了...`);
+                return val;
+            },
+            set(newVal) {
+                console.log(`${key}属性被修改了...`);
+                val = newVal;
+            }
+        })
+    }
+    let person = observable({
+        name: 'tom',
+        age: 15
+    });})()
+
 </script>
 
 </html>
