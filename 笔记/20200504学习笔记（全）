@@ -4,3 +4,39 @@ https://juejin.im/post/5ba32171f265da0ab719a6d7
 作用域链：js是静态作用域 也就是说 函数在定义的时候就已经确定作用域了
 闭包：引用函数外部的变量，他会产生一个类似的背包 里去储存函数内的变量 以至于 如果这变量是外部定义的 他被销毁 也不会影响函数内的变量储存
 this的指向
+0610 js基础题比笔记
+变量提升也有优先级, 函数声明 > arguments > 变量声明 （会忽略后面声明的）
+连等于 执行顺序是从右到左
+for in会遍历原型链上的属性 可以用hasOwnProperty(i)去排除
+只有下面几种值在转换为布尔值时为false:+0,-0,NaN,false,'',null,undefined。
+join方法如果省略参数,默认以,分隔。
+
+Object instanceof Function为true 这里的Object相当于是一个方法
+
+重拍和回流：
+浏览器运行机制：1：解析html生成dom树2：解析css给每个dom加上对应的样式3：计算dom的位子大小等4：绘制
+createDocumentFragment
+
+五、sessionStorage、localStorage和cookie的区别
+共同点：都是保存在浏览器端、且同源的
+区别：
+1、cookie数据始终在同源的http请求中携带（即使不需要），即cookie在浏览器和服务器间来回传递，而sessionStorage和localStorage不会自动把数据发送给服务器，仅在本地保存。cookie数据还有路径（path）的概念，可以限制cookie只属于某个路径下
+2、存储大小限制也不同，cookie数据不能超过4K，同时因为每次http请求都会携带cookie、所以cookie只适合保存很小的数据，如会话标识。sessionStorage和localStorage虽然也有存储大小的限制，但比cookie大得多，可以达到5M或更大
+3、数据有效期不同，sessionStorage：仅在当前浏览器窗口关闭之前有效；localStorage：始终有效，窗口或浏览器关闭也一直保存，因此用作持久数据；cookie：只在设置的cookie过期时间之前有效，即使窗口关闭或浏览器关闭
+4、作用域不同，sessionStorage不在不同的浏览器窗口中共享，即使是同一个页面；localstorage在所有同源窗口中都是共享的；cookie也是在所有同源窗口中都是共享的
+5、web Storage支持事件通知机制，可以将数据更新的通知发送给监听者
+6、web Storage的api接口使用更方便
+
+
+cache-control是相对时间，expires是绝对时间
+expires的缺点是如果本地客户端的时间不准确 就会和客户端的时间造成误差 导致缓存混乱
+前者的优先级高于后者
+
+协商缓存在 http 1.1 版本中，服务器通过 Etag来设置响应头缓存标识。
+Etag的值由服务端生成。
+在第一次请求时，服务器会将资源和 Etag一并返回给浏览器，浏览器将两者缓存到本地缓存数据库。
+在第二次请求时，浏览器会将Etag信息放到If-None-Match请求头去访问服务器，
+服务器收到请求后，会将服务器中的文件标识与浏览器发来的标识进行对比，如果不相同，服务器返回更新的资源和新的Etag ，
+如果相同，服务器返回 304 状态码，浏览器读取缓存。
+
+http 1.0原理相同用ModifiedTime来进行比较

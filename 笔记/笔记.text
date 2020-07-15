@@ -19,6 +19,10 @@ item：
 order：排列顺序
  定义项目的放大比例
 flex-grow: <number>;
+就是如果多个flex元素的宽度总和超过父元素宽度（未设置flex-warp），
+那么flex的机制就会让它们进行压缩宽度重新分配宽度，flex-grow实际就是这里的分配比例，flex-grow:2的元素宽度会是值为1的元素的2倍。
+优先考虑设置了width的
+
  定义了项目的缩小比例
 flex-shrink: <number>;
 以上两者的缩放比例是相对于子级的，并且是相对于可以分配的空间的，比如flex-grow，子级的各个比例是去分配空余的空间的
@@ -35,3 +39,5 @@ flex-shrink: <number>;
 
 
 align-self: 允许单个项目有与其他项目不一样的对齐方式
+xss和csrf
+
